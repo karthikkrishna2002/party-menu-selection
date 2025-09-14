@@ -1,38 +1,376 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px 24px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(60,60,120,0.08);
+}
+
+h1 {
+  text-align: center;
+  color: #2d3a4a;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.filters {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  background: linear-gradient(90deg, #e0eafd 60%, #e3e6f3 100%);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 16px rgba(0,123,255,0.08);
+}
+
+.categories button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  background: #e9ecef;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.categories button:hover,
+.categories .active {
+  background: linear-gradient(90deg, #007bff 65%, #0056b3 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0,123,255,0.18), 0 0 6px 2px #fcb69f;
+}
+
+.search-filter input {
+  padding: 8px 14px;
+  margin-right: 10px;
+  border: 1px solid #bfc9d1;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f4f6fb;
+  transition: border 0.2s;
+}
+
+.search-filter input:focus {
+  border: 1.5px solid #007bff;
+  outline: none;
+}
+
+.dish-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.dish-card {
+  width: 260px;
+  background: linear-gradient(120deg, #ffffff 70%, #e0eafd 100%);
+  border: 1.5px solid #e3e6f3;
+  border-radius: 14px;
+  padding: 18px 15px 15px 15px;
+  box-shadow: 0 8px 32px rgba(0,123,255,0.12), 0 4px 16px rgba(240,112,181,0.07);
+  transition: transform 0.18s, box-shadow 0.18s;
+  position: relative;
+}
+
+.dish-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 16px 48px rgba(0,123,255,0.22), 0 2px 8px rgba(252,182,159,0.10);
+}
+
+.dish-card img {
+  width: 100%;
+  max-width: 240px;
+  height: 160px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  background: #f8f9fa;
+  display: block;
+  margin: 0 auto 10px auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1.5px solid #e3e6f3;
+  transition: border 0.2s, box-shadow 0.2s, transform 0.18s;
+}
+
+.dish-card:hover img {
+  border: 2px solid #007bff;
+  box-shadow: 0 6px 24px rgba(0,123,255,0.13), 0 0 8px #fcb69f;
+  transform: scale(1.03);
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 8px 16px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.add-btn {
+  background: linear-gradient(90deg, #28a745 70%, #218838 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(40,167,69,0.08);
+}
+
+.add-btn:hover {
+  background: linear-gradient(90deg, #218838 60%, #28a745 100%);
+  box-shadow: 0 0 6px 2px #fcb69f;
+}
+
+.remove-btn {
+  background: linear-gradient(90deg, #dc3545 60%, #b21f2d 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(220,53,69,0.08);
+}
+
+.remove-btn:hover {
+  background: linear-gradient(90deg, #b21f2d 60%, #dc3545 100%);
+  box-shadow: 0 0 6px 2px #fcb69f;
+}
+
+.ingredients-btn {
+  background: linear-gradient(90deg, #17a2b8 60%, #138496 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(23,162,184,0.08);
+}
+
+.ingredients-btn:hover {
+  background: linear-gradient(90deg, #138496 60%, #17a2b8 100%);
+  box-shadow: 0 0 6px 2px #fcb69f;
+}
+
+.summary {
+  margin-top: 28px;
+  background: linear-gradient(90deg, #f7fbff 70%, #e0eafd 100%);
+  padding: 22px 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-size: 1.1rem;
+}
+
+.cart-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: linear-gradient(90deg, #ff8a65 60%, #ff6f91 100%);
   color: white;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 10px 16px;
+  box-shadow: 0 4px 16px rgba(255,111,145,0.13), 0 2px 8px rgba(255,138,101,0.11);
+  position: relative;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+.cart-icon:hover {
+  background: linear-gradient(90deg, #ff6f91 65%, #ff8a65 100%);
+  box-shadow: 0 8px 24px rgba(255,111,145,0.18), 0 0 8px #fcb69f;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.cart-icon span {
+  margin-right: 5px;
+}
+
+.cart-icon i {
+  font-size: 1.5rem;
+}
+
+.cart-icon .cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  padding: 2px 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}
+
+.modal {
+  background: linear-gradient(120deg, #f7fbff 70%, #e0eafd 100%);
+  padding: 28px 24px;
+  border-radius: 14px;
+  width: 420px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  position: relative;
+  animation: modalIn 0.25s;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.95) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.close-btn {
+  margin-top: 18px;
+  background: #6c757d;
+  color: white;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: #495057;
+  box-shadow: 0 0 6px 2px #fcb69f;
+}
+
+@media (max-width: 700px) {
+  .app-container {
+    padding: 10px 2vw;
   }
-  to {
-    transform: rotate(360deg);
+  .dish-list {
+    gap: 12px;
   }
+  .dish-card {
+    width: 98vw;
+    max-width: 340px;
+    padding: 12px 8px;
+  }
+  .modal {
+    width: 95vw;
+    min-width: unset;
+    padding: 18px 8px;
+  }
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2.5px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+/* 🌿 Veg / 🍗 Non-Veg filter buttons */
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f0f0f0;
+  color: #444;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Active Veg */
+.filter-button.veg.active {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(24, 90, 157, 0.3);
+}
+
+/* Active Non-Veg */
+.filter-button.nonveg.active {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(221, 36, 118, 0.3);
+}
+
+/* Hover animation */
+.filter-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Subtle ripple effect */
+.filter-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.6s ease;
+}
+
+.filter-button:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 0;
 }
